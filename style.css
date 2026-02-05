@@ -27,11 +27,12 @@ body {
 }
 
 .wrapper {
-    padding: 40px 60px;
+    padding: 40px 60px; /* Sera écrasé sur mobile par la media query en bas */
     max-width: 1400px;
     margin: 0 auto;
 }
 
+/* --- HEADER CORRIGÉ --- */
 header {
     display: flex;
     justify-content: space-between;
@@ -48,10 +49,11 @@ header {
 }
 
 .hero h1 {
-    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-size: clamp(2.5rem, 10vw, 8rem); /* Réduit le minimum pour mobile */
     line-height: 0.85;
     letter-spacing: -0.04em;
     font-weight: 900;
+    text-transform: uppercase;
 }
 
 .content {
@@ -140,11 +142,11 @@ header {
     font-weight: 600;
 }
 
-/* Contact Box */
+/* --- SECTION CONTACT CORRIGÉE --- */
 .contact {
     margin: 100px 0;
     border: 1px solid var(--border);
-    padding: 60px;
+    padding: 60px; /* Trop grand pour mobile, géré en bas */
     text-align: center;
 }
 
@@ -161,8 +163,10 @@ header {
     color: var(--grey-med);
 }
 
+/* BOUTON CORRIGÉ */
 .cta-link {
-    font-size: 1.2rem;
+    display: inline-block; /* Pour que le padding et la largeur fonctionnent */
+    font-size: clamp(0.9rem, 4vw, 1.2rem);
     font-weight: 900;
     color: var(--accent);
     text-decoration: none;
@@ -170,6 +174,7 @@ header {
     border: 1px solid var(--accent);
     padding: 15px 30px;
     transition: all 0.3s ease;
+    word-break: break-word;
 }
 
 .cta-link:hover {
@@ -187,8 +192,39 @@ footer {
     letter-spacing: 2px;
 }
 
+/* --- MEDIA QUERIES : LES SOLUTIONS SMARTPHONE --- */
+
 @media (max-width: 768px) {
-    .wrapper { padding: 20px; }
-    .hero h1 { font-size: 4rem; }
-    footer { flex-direction: column; gap: 10px; }
+    .wrapper { 
+        padding: 20px; /* Réduit la marge sur les côtés */
+    }
+
+    header {
+        flex-direction: column; /* Empile le logo et le statut */
+        align-items: flex-start;
+        gap: 15px;
+        text-align: left;
+    }
+
+    .hero {
+        margin: 40px 0;
+    }
+
+    .hero h1 { 
+        font-size: 3.2rem; /* Taille plus adaptée pour "ARCHETYPAL" */
+    }
+
+    .contact {
+        padding: 40px 20px; /* Moins de vide interne sur mobile */
+    }
+
+    .cta-link {
+        width: 100%; /* Le bouton prend toute la largeur sur mobile */
+        text-align: center;
+    }
+
+    footer { 
+        flex-direction: column; 
+        gap: 20px; 
+    }
 }
